@@ -1,3 +1,4 @@
+import 'package:blog/Detalles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,9 @@ class BlogApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        "detalle": (context) => const Detalles(),
+      },
       title: "Blog App",
       /*Color al tema del header */
       theme: ThemeData(
@@ -53,91 +57,128 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 50,
         ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("blog").snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something went wrong');
-          } else if (snapshot.hasData || snapshot.data != null) {
-            return ListView.builder(
-                shrinkWrap: true,
-                itemCount: snapshot.data?.docs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  QueryDocumentSnapshot<Object?>? documentSnapshot =
-                      snapshot.data?.docs[index];
+      body: Center(
+          child: Column(
+        children: [
+          SizedBox(
+            height: 9,
+          ),
+          /*Nuestro blog */
+          Container(
+            child: Text(
+              "Nuestro blog",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
+            ),
+            width: 500,
+            height: 50,
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection("blog").snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasData || snapshot.data != null) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data?.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    QueryDocumentSnapshot<Object?>? documentSnapshot =
+                        snapshot.data?.docs[index];
 
-                  return Column(children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        (documentSnapshot != null)
-                            ? (documentSnapshot["image"])
-                            : "",
-                        width: 500,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    return Column(
                       children: [
-                        //titulo
-                        Text(
-                          (documentSnapshot != null)
-                              ? (documentSnapshot["title"])
-                              : "",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            (documentSnapshot != null)
+                                ? (documentSnapshot["image"])
+                                : "",
+                            width: 500,
+                          ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            //titulo
+                            Text(
+                              (documentSnapshot != null)
+                                  ? (documentSnapshot["title"])
+                                  : "",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
 
+                            Text(
+                              (documentSnapshot != null)
+                                  ? (getTime(
+                                      documentSnapshot["date"] as Timestamp))
+                                  : "",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Text(
                           (documentSnapshot != null)
-                              ? (getTime(documentSnapshot["date"] as Timestamp))
+                              ? (documentSnapshot["summary"])
                               : "",
-                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        /* */
+                        Container(
+                          child: GestureDetector(
+                            child: Text(
+                              "Click here",
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.blue),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                "detalle",
+                                arguments: documentSnapshot?.id,
+                              );
+                            },
+                          ),
+                          width: 500,
+                          height: 20,
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      (documentSnapshot != null)
-                          ? (documentSnapshot["summary"])
-                          : "",
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    /* */
-                    Container(
-                      child: GestureDetector(
-                          child: Text(
-                            "Click here",
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: Colors.blue),
-                          ),
-                          onTap: () {
-                            // do what you need to do when "Click here" gets clicked
-                          }),
-                      width: 500,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ]);
-                });
-          }
-          return const Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Colors.red,
-              ),
-            ),
-          );
+                    );
+                  },
+                );
+              }
+
+              return const Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.red,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: Color.fromARGB(255, 3, 10, 43),
+        onPressed: () {
+          setState(() {});
         },
       ),
     );
