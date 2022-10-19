@@ -1,3 +1,4 @@
+import 'package:blog/Editar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,7 +38,13 @@ class _DetallesState extends State<Detalles> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Editar(),
+                  ));
+            },
           ),
         ],
       ),
