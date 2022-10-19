@@ -28,34 +28,22 @@ class _DetallesState extends State<Detalles> {
 
     return Scaffold(
       appBar: AppBar(
-          /*Logo */
-          title: Text(
-        "Volver",
-        style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-      )),
+        /*Logo */
+        title: Text(
+          "Volver",
+          style: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Center(
           child: Column(
         children: [
-          StreamBuilder<QuerySnapshot>(
-              stream: doc3,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text("Error" + snapshot.error.toString());
-                } else {
-                  var snap = "";
-                  if (snapshot.data?.size != null) {
-                    snap = "vacio";
-                  } else {
-                    snap = snapshot.data!.size.toString();
-                  }
-
-                  return Text("Result" + snap);
-                }
-              }),
-          SizedBox(
-            height: 9,
-          ),
           /*Nuestro blog */
           Container(
             child: Text(
@@ -106,6 +94,7 @@ class _DetallesState extends State<Detalles> {
                   ),
                   Text(
                     docsnap["summary"],
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: 20,
@@ -115,24 +104,43 @@ class _DetallesState extends State<Detalles> {
                     indent: 25,
                     endIndent: 25,
                     thickness: 3,
-                  )
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  /*Texto */
+
+                  Text(
+                    ' El desarrollo de las apps viene a ser con el tiempo el mayor aliado tecnolñogico, donde el usuario puede generar o ahorras recursos en sus procesos principales. ',
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  /*Imagen */
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      "https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/HeroHomepage_2880x1200.jpg",
+                      width: 500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    ' El desarrollo de las apps viene a ser con el tiempo el mayor aliado tecnolñogico, donde el usuario puede generar o ahorras recursos en sus procesos principales. ',
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               );
             },
           ),
         ],
       )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        backgroundColor: Color.fromARGB(255, 3, 10, 43),
-        onPressed: () {
-          setState(() {});
-        },
-      ),
     );
   }
 
