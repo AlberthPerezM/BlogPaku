@@ -2,7 +2,6 @@ import 'package:blog/Editar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:intl/intl.dart';
 
 class Detalles extends StatefulWidget {
@@ -48,13 +47,9 @@ class _DetallesState extends State<Detalles> {
         children: [
           /*Nuestro blog */
           const SizedBox(
-            width: 500,
-            height: 50,
-            child: Text(
-              "",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.left,
-            ),
+            width: 10,
+            height: 20,
+           
           ),
           StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             stream: doc.snapshots(),
@@ -65,15 +60,17 @@ class _DetallesState extends State<Detalles> {
               final docsnap = snapshot.data!;
               return Column(
                 children: [
+                  
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       docsnap['image'],
-                      width: 500,
+                      width: 400,
+                      height: 200 ,
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,12 +79,12 @@ class _DetallesState extends State<Detalles> {
                       Text(
                         docsnap['title'],
                         style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
 
                       Text(
                         (getTime(docsnap['date'])),
-                        style: const TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 15),
                       ),
                     ],
                   ),
@@ -99,7 +96,7 @@ class _DetallesState extends State<Detalles> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   const Divider(
                     color: Colors.black,
@@ -114,9 +111,10 @@ class _DetallesState extends State<Detalles> {
                   StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                     stream: docDetail.snapshots(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if(snapshot.hasError) {
+                      if (snapshot.hasError) {
                         return const Text("error en obtener info detail");
                       } else if (snapshot.hasData || snapshot.data != null) {
+                        /* */
                         return getDetailWidgetByData(snapshot.data.docs);
                       } else {
                         return const Center(child: CircularProgressIndicator());
@@ -138,14 +136,39 @@ class _DetallesState extends State<Detalles> {
     var date = time.toDate();
     return formatter.format(date);
   }
-  
+
   getDetailWidgetByData(List<dynamic> docsForFlutter) {
-      return ListView.builder(
-        itemCount: docsForFlutter.length,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return Text(docsForFlutter[index]["data"]);
-        },
-      );
+    return ListView.builder(
+      itemCount: docsForFlutter.length,
+      shrinkWrap: true,
+      itemBuilder: (BuildContext context, int index) {
+        if (docsForFlutter[index]["type"] == "imagen") {
+          return 
+          Expanded(child:
+
+          Container ( width:80, 
+          child: 
+          ClipRRect(
+            
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              docsForFlutter[index]["data"],
+               
+            ),
+          ),
+          ),
+          );
+        } else if (docsForFlutter[index]["type"] == "parrafo") {
+          return 
+          Container( width: 10,  child:
+          Text(docsForFlutter[index]["data"],textAlign: TextAlign.center,));
+        } else {
+          return Text(
+            "Tipo no reconocido",
+            textAlign: TextAlign.center,
+          );
+        }
+      },
+    );
   }
 }

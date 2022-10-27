@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             (documentSnapshot != null)
                                 ? (documentSnapshot["image"])
                                 : "",
-                            width: 500,
+                            width: 400,
                           ),
                         ),
                         SizedBox(
@@ -109,16 +109,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ? (documentSnapshot["title"])
                                   : "",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 15, fontWeight: FontWeight.bold),
                             ),
-
+                            Container(
+                            child:
                             Text(
                               (documentSnapshot != null)
                                   ? (getTime(
                                       documentSnapshot["date"] as Timestamp))
                                   : "",
-                              style: TextStyle(fontSize: 18),
-                            ),
+                              style: TextStyle(fontSize: 15),
+                            ),),
                           ],
                         ),
                         SizedBox(
@@ -130,13 +131,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               : "",
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 9,
                         ),
                         /* */
-                        Container(
+                           Container(
                           child: GestureDetector(
                             child: Text(
-                              "Click here",
+                              "Ver mas",
                               textAlign: TextAlign.right,
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
