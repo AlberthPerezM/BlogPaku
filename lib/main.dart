@@ -1,4 +1,5 @@
 import 'package:blog/Detalles.dart';
+import 'package:blog/Editar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class BlogApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "detalle": (context) => const Detalles(),
+        "editar": (context) => const Editar(),
       },
       title: "Blog App",
       /*Color al tema del header */
@@ -57,9 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 50,
         ),
       ),
-      body: Center(
-          child: Column(
-        children: [
+      body: ListView(
+      padding: const EdgeInsets.all(8),
+          children: [
           SizedBox(
             height: 9,
           ),
@@ -170,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
         ],
-      )),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(

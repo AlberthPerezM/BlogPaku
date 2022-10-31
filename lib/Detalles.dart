@@ -1,8 +1,14 @@
 import 'package:blog/Editar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+
+import 'firebase_options.dart';
+
+
+
 
 class Detalles extends StatefulWidget {
   const Detalles({super.key});
@@ -20,9 +26,10 @@ class _DetallesState extends State<Detalles> {
     final args = ModalRoute.of(context)!.settings.arguments as String;
     final doc = db.doc("/blog/$args");
     final docDetail = db.collection("/blog/$args/body").orderBy("position");
-
+                      
     return Scaffold(
       appBar: AppBar(
+        
         /*Logo */
         title: const Text(
           "Volver",
@@ -30,20 +37,24 @@ class _DetallesState extends State<Detalles> {
               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: <Widget>[
+
+
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Editar(),
-                  ));
+              Navigator.pushNamed(
+              context,
+              "editar",
+              arguments: args,
+
+              );
             },
           ),
         ],
       ),
-      body: Center(
-          child: Column(
+      body: ListView(
+            padding: const EdgeInsets.all(8),
+
         children: [
           /*Nuestro blog */
           const SizedBox(
@@ -91,9 +102,14 @@ class _DetallesState extends State<Detalles> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  Container(
+                  child:
+                   Text(
                     docsnap["summary"],
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.justify,
+                   ),
+                    margin:EdgeInsets.fromLTRB(8, 8, 8, 8),
+ 
                   ),
                   const SizedBox(
                     height: 10,
@@ -126,7 +142,7 @@ class _DetallesState extends State<Detalles> {
             },
           ),
         ],
-      )),
+      ),
     );
   }
 
@@ -160,8 +176,13 @@ class _DetallesState extends State<Detalles> {
           );
         } else if (docsForFlutter[index]["type"] == "parrafo") {
           return 
-          Container( width: 10,  child:
-          Text(docsForFlutter[index]["data"],textAlign: TextAlign.center,));
+          Container( 
+            width: 10, 
+            child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
+            margin:EdgeInsets.fromLTRB(8, 8, 8, 8),
+          );
+            
+         
         } else {
           return Text(
             "Tipo no reconocido",
