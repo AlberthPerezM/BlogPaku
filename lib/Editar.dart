@@ -14,6 +14,8 @@ class Editar extends StatefulWidget {
 class _EditarState extends State<Editar> {
   bool isVisible = false;
   bool _offstage = true;
+  var width=370.0;
+   int numero=0;
 
 
   @override
@@ -53,7 +55,46 @@ class _EditarState extends State<Editar> {
               final docsnap = snapshot.data!;
               return Column(
                 children: [
-                
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+              Offstage(
+                offstage: _offstage,
+                 child: IconButton(
+                    color: Color.fromARGB(255, 9, 5, 5),
+                    icon: const Icon(
+                      Icons.delete,
+                      size: 30.0,
+                    ),
+                    onPressed: () {},
+                  ),
+              ),
+               InkWell(
+                  child: 
+                  
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      docsnap['image'],
+                      width: width,
+                      height: 200 ,
+                    ),
+                  ),
+               
+                  onTap: ( ) {
+                    setState(() {
+                      _offstage = !_offstage;
+                      if(_offstage){
+                        width=370;
+                      }else{
+                       width=320;
+                    }
+                    });
+                  },
+                ),
+         
+              ]
+             ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
