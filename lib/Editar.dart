@@ -1,7 +1,5 @@
-import 'package:blog/Editar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class Editar extends StatefulWidget {
@@ -61,7 +59,7 @@ class _EditarState extends State<Editar> {
               Offstage(
                 offstage: _offstage,
                  child: IconButton(
-                    color: Color.fromARGB(255, 9, 5, 5),
+                    color: const Color.fromARGB(255, 9, 5, 5),
                     icon: const Icon(
                       Icons.delete,
                       size: 30.0,
@@ -126,12 +124,12 @@ class _EditarState extends State<Editar> {
                     height: 20,
                   ),
                   Container(
+                  margin:const EdgeInsets.fromLTRB(8, 8, 8, 8),
                   child:
                    Text(
                     docsnap["summary"],
                     textAlign: TextAlign.justify,
                    ),
-                    margin:EdgeInsets.fromLTRB(8, 8, 8, 8),
  
                   ),
                   const SizedBox(
@@ -183,31 +181,26 @@ class _EditarState extends State<Editar> {
       itemBuilder: (BuildContext context, int index) {
         if (docsForFlutter[index]["type"] == "imagen") {
           return 
-          Expanded(child:
-
-          Container ( width:80, 
-          child: 
+          Expanded(
+          child:
           ClipRRect(
-            
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
               docsForFlutter[index]["data"],
-               
             ),
           ),
-          ),
-          );
+         );
         } else if (docsForFlutter[index]["type"] == "parrafo") {
           return 
           Container( 
-            width: 10, 
+            width: 10,
+            margin:const EdgeInsets.fromLTRB(8, 8, 8, 8), 
             child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
-            margin:EdgeInsets.fromLTRB(8, 8, 8, 8),
           );
             
          
         } else {
-          return Text(
+          return const Text(
             "Tipo no reconocido",
             textAlign: TextAlign.center,
          );

@@ -1,11 +1,9 @@
 import 'package:blog/Editar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import 'firebase_options.dart';
 
 
 
@@ -103,12 +101,12 @@ class _DetallesState extends State<Detalles> {
                     height: 20,
                   ),
                   Container(
+                  margin:const EdgeInsets.fromLTRB(8, 8, 8, 8),
                   child:
                    Text(
                     docsnap["summary"],
                     textAlign: TextAlign.justify,
                    ),
-                    margin:EdgeInsets.fromLTRB(8, 8, 8, 8),
  
                   ),
                   const SizedBox(
@@ -161,30 +159,26 @@ class _DetallesState extends State<Detalles> {
         if (docsForFlutter[index]["type"] == "imagen") {
           return 
           Expanded(child:
-
-          Container ( width:80, 
-          child: 
-          ClipRRect(
-            
+          ClipRRect(  
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
-              docsForFlutter[index]["data"],
-               
+              docsForFlutter[index]["data"], 
             ),
           ),
-          ),
-          );
+        );
+      
         } else if (docsForFlutter[index]["type"] == "parrafo") {
           return 
           Container( 
-            width: 10, 
-            child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
-            margin:EdgeInsets.fromLTRB(8, 8, 8, 8),
+            width: 10,
+            margin:const EdgeInsets.fromLTRB(8, 8, 8, 8), 
+            child:
+            Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify),
           );
             
          
         } else {
-          return Text(
+          return const Text(
             "Tipo no reconocido",
             textAlign: TextAlign.center,
           );
