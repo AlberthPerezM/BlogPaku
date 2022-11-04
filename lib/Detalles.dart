@@ -1,11 +1,7 @@
-import 'package:blog/Editar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-
-
-
 
 
 class Detalles extends StatefulWidget {
@@ -52,7 +48,7 @@ class _DetallesState extends State<Detalles> {
       ),
       body: ListView(
             padding: const EdgeInsets.all(8),
-
+ 
         children: [
           /*Nuestro blog */
           const SizedBox(
@@ -90,7 +86,6 @@ class _DetallesState extends State<Detalles> {
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
-
                       Text(
                         (getTime(docsnap['date'])),
                         style: const TextStyle(fontSize: 15),

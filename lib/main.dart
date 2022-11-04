@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,7 +27,7 @@ class BlogApp extends StatelessWidget {
       title: "Blog App",
       /*Color al tema del header */
       theme: ThemeData(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Color.fromARGB(255, 3, 10, 43),
         ),
       ),
@@ -62,18 +61,18 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
       padding: const EdgeInsets.all(8),
           children: [
-          SizedBox(
+          const SizedBox(
             height: 9,
           ),
           /*Nuestro blog */
-          Container(
+          const SizedBox(
+            width: 500,
+            height: 50,
             child: Text(
               "Nuestro blog",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
-            width: 500,
-            height: 50,
           ),
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection("blog").snapshots(),
@@ -99,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 400,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -110,21 +109,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               (documentSnapshot != null)
                                   ? (documentSnapshot["title"])
                                   : "",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
-                            Container(
-                            child:
                             Text(
                               (documentSnapshot != null)
                                   ? (getTime(
                                       documentSnapshot["date"] as Timestamp))
                                   : "",
-                              style: TextStyle(fontSize: 15),
-                            ),),
+                              style: const TextStyle(fontSize: 15),
+                            ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Text(
@@ -132,13 +129,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               ? (documentSnapshot["summary"])
                               : "",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 9,
                         ),
                         /* */
-                           Container(
+                           SizedBox(
+                          width: 500,
+                          height: 20,
                           child: GestureDetector(
-                            child: Text(
+                            child: const Text(
                               "Ver mas",
                               textAlign: TextAlign.right,
                               style: TextStyle(
@@ -153,8 +152,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               );
                             },
                           ),
-                          width: 500,
-                          height: 20,
                         ),
                       ],
                     );
