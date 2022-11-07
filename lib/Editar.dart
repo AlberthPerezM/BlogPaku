@@ -55,7 +55,7 @@ class _EditarState extends State<Editar> {
               final docsnap = snapshot.data!;
               return Column(
                 children: [
-                   Row(
+                  Row(
                     children: [
                     BlocBuilder<EditarBloc, EditarState>(
                      bloc:varible,
@@ -80,7 +80,7 @@ class _EditarState extends State<Editar> {
                        }
                       },
                     ), 
-                    Container(
+                    SizedBox(
                         width: 330,
                         child: 
                         InkWell(                        
@@ -104,15 +104,16 @@ class _EditarState extends State<Editar> {
                   Row( 
                     children: [
                       //titulo
-                      Expanded(child:     
-                      Container(
-                      margin: EdgeInsets.only(left: espaciado),
-                      child: 
-                      Text(
-                        docsnap['title'],
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold ),
-                        ),
-                       ),
+                      Expanded(flex: 1, 
+                      child:     
+                       Container(
+                       margin: EdgeInsets.only(left: espaciado),
+                       child: 
+                        Text(
+                          docsnap['title'],
+                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold ),
+                         ),
+                         ),
                       ),
                       Text(
                         (getTime(docsnap['date'])),
@@ -182,24 +183,55 @@ class _EditarState extends State<Editar> {
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
        var widthq = MediaQuery.of(context).size.width;
- 
+       final varible =EditarBloc();
         if (docsForFlutter[index]["type"] == "imagen") {
-          return 
-          Expanded(
-          child:
-          Container(
-          margin: EdgeInsets.fromLTRB(espaciado, 8, 8, 8),
-          child:
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              docsForFlutter[index]["data"],
-            ),  
-          ), 
-          ),
-         );
-        } else if (docsForFlutter[index]["type"] == "parrafo") {
-          return 
+             return 
+                  Row(
+                    children: [
+                    BlocBuilder<EditarBloc, EditarState>(
+                     bloc:varible,
+                     builder: (context, state) {
+                     if ( state is Initial || state is Running){
+                     return Visibility(
+                        visible:visibilidad(state),
+                        maintainSize:true,
+                        maintainAnimation: true,
+                        maintainState: true,
+                        child: IconButton(
+                         color:const Color.fromARGB(255, 0, 0, 0),
+                         icon: const Icon(
+                         Icons.delete,
+                         size: 20.0,
+                          ),
+                          onPressed: () {},
+                         ),
+                      ); }
+                       else{
+                        return Container();
+                       }
+                      },
+                    ), 
+                   SizedBox(
+                        width: 330,
+                        child: 
+                        InkWell(                        
+                          child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),           
+                          child: Image.network(
+                           docsForFlutter[index]["data"],
+                          ),
+                        ),
+                           onTap: () {
+                             varible.add(const EditarEvent.mostrar2()
+                            );
+                          },                 
+                      ),
+                    ),
+                   ]
+                 );
+
+          } else if (docsForFlutter[index]["position"] == 1) {
+            return 
              Row(
               children: [
                 Visibility(
@@ -219,17 +251,51 @@ class _EditarState extends State<Editar> {
                 InkWell(
                 child:
                 SizedBox( 
-                    width:widthq-espaciado-8,
+                    width:widthq-espaciado-16,
                    child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
                     ),
-                  onTap: ( ) {
-                    setState(() {
-                    }
-                   ); 
-                  }),                 
+                    onTap: () {
+                      setState(() { 
+                      }); 
+                    },                 
+                  ),                 
                 ]
-             );
-          } else {
+              );
+          }else if (docsForFlutter[index]["position"] == 3) {
+            return 
+             Row(
+              children: [
+                Visibility(
+                  visible:false,
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  child: IconButton(
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    icon: const Icon(
+                      Icons.delete_rounded,
+                      size:30.0,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                InkWell(
+                child:
+                SizedBox( 
+                  width:widthq-espaciado-16,
+                   child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
+                    ),
+                    onTap: () {
+                      setState(() { 
+                      }); 
+                    },                 
+                  ),                 
+                ]
+              );
+          } 
+          
+          
+          else {
           return const Text(
             "Tipo no reconocido",
             textAlign: TextAlign.center,

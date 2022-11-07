@@ -19,32 +19,44 @@ mixin _$EditarEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() mostrar,
+    required TResult Function() mostrar2,
+    required TResult Function() mostrar3,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? mostrar,
+    TResult? Function()? mostrar2,
+    TResult? Function()? mostrar3,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? mostrar,
+    TResult Function()? mostrar2,
+    TResult Function()? mostrar3,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Mostrar value) mostrar,
+    required TResult Function(Mostrar2 value) mostrar2,
+    required TResult Function(Mostrar3 value) mostrar3,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Mostrar value)? mostrar,
+    TResult? Function(Mostrar2 value)? mostrar2,
+    TResult? Function(Mostrar3 value)? mostrar3,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Mostrar value)? mostrar,
+    TResult Function(Mostrar2 value)? mostrar2,
+    TResult Function(Mostrar3 value)? mostrar3,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,6 +123,8 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() mostrar,
+    required TResult Function() mostrar2,
+    required TResult Function() mostrar3,
   }) {
     return mostrar();
   }
@@ -119,6 +133,8 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? mostrar,
+    TResult? Function()? mostrar2,
+    TResult? Function()? mostrar3,
   }) {
     return mostrar?.call();
   }
@@ -127,6 +143,8 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? mostrar,
+    TResult Function()? mostrar2,
+    TResult Function()? mostrar3,
     required TResult orElse(),
   }) {
     if (mostrar != null) {
@@ -139,6 +157,8 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Mostrar value) mostrar,
+    required TResult Function(Mostrar2 value) mostrar2,
+    required TResult Function(Mostrar3 value) mostrar3,
   }) {
     return mostrar(this);
   }
@@ -147,6 +167,8 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Mostrar value)? mostrar,
+    TResult? Function(Mostrar2 value)? mostrar2,
+    TResult? Function(Mostrar3 value)? mostrar3,
   }) {
     return mostrar?.call(this);
   }
@@ -155,6 +177,8 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Mostrar value)? mostrar,
+    TResult Function(Mostrar2 value)? mostrar2,
+    TResult Function(Mostrar3 value)? mostrar3,
     required TResult orElse(),
   }) {
     if (mostrar != null) {
@@ -166,6 +190,232 @@ class _$Mostrar with DiagnosticableTreeMixin implements Mostrar {
 
 abstract class Mostrar implements EditarEvent {
   const factory Mostrar() = _$Mostrar;
+}
+
+/// @nodoc
+abstract class _$$Mostrar2CopyWith<$Res> {
+  factory _$$Mostrar2CopyWith(
+          _$Mostrar2 value, $Res Function(_$Mostrar2) then) =
+      __$$Mostrar2CopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$Mostrar2CopyWithImpl<$Res>
+    extends _$EditarEventCopyWithImpl<$Res, _$Mostrar2>
+    implements _$$Mostrar2CopyWith<$Res> {
+  __$$Mostrar2CopyWithImpl(_$Mostrar2 _value, $Res Function(_$Mostrar2) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$Mostrar2 with DiagnosticableTreeMixin implements Mostrar2 {
+  const _$Mostrar2();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'EditarEvent.mostrar2()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'EditarEvent.mostrar2'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Mostrar2);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() mostrar,
+    required TResult Function() mostrar2,
+    required TResult Function() mostrar3,
+  }) {
+    return mostrar2();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? mostrar,
+    TResult? Function()? mostrar2,
+    TResult? Function()? mostrar3,
+  }) {
+    return mostrar2?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? mostrar,
+    TResult Function()? mostrar2,
+    TResult Function()? mostrar3,
+    required TResult orElse(),
+  }) {
+    if (mostrar2 != null) {
+      return mostrar2();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Mostrar value) mostrar,
+    required TResult Function(Mostrar2 value) mostrar2,
+    required TResult Function(Mostrar3 value) mostrar3,
+  }) {
+    return mostrar2(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Mostrar value)? mostrar,
+    TResult? Function(Mostrar2 value)? mostrar2,
+    TResult? Function(Mostrar3 value)? mostrar3,
+  }) {
+    return mostrar2?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Mostrar value)? mostrar,
+    TResult Function(Mostrar2 value)? mostrar2,
+    TResult Function(Mostrar3 value)? mostrar3,
+    required TResult orElse(),
+  }) {
+    if (mostrar2 != null) {
+      return mostrar2(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Mostrar2 implements EditarEvent {
+  const factory Mostrar2() = _$Mostrar2;
+}
+
+/// @nodoc
+abstract class _$$Mostrar3CopyWith<$Res> {
+  factory _$$Mostrar3CopyWith(
+          _$Mostrar3 value, $Res Function(_$Mostrar3) then) =
+      __$$Mostrar3CopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$Mostrar3CopyWithImpl<$Res>
+    extends _$EditarEventCopyWithImpl<$Res, _$Mostrar3>
+    implements _$$Mostrar3CopyWith<$Res> {
+  __$$Mostrar3CopyWithImpl(_$Mostrar3 _value, $Res Function(_$Mostrar3) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$Mostrar3 with DiagnosticableTreeMixin implements Mostrar3 {
+  const _$Mostrar3();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'EditarEvent.mostrar3()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'EditarEvent.mostrar3'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Mostrar3);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() mostrar,
+    required TResult Function() mostrar2,
+    required TResult Function() mostrar3,
+  }) {
+    return mostrar3();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? mostrar,
+    TResult? Function()? mostrar2,
+    TResult? Function()? mostrar3,
+  }) {
+    return mostrar3?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? mostrar,
+    TResult Function()? mostrar2,
+    TResult Function()? mostrar3,
+    required TResult orElse(),
+  }) {
+    if (mostrar3 != null) {
+      return mostrar3();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Mostrar value) mostrar,
+    required TResult Function(Mostrar2 value) mostrar2,
+    required TResult Function(Mostrar3 value) mostrar3,
+  }) {
+    return mostrar3(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Mostrar value)? mostrar,
+    TResult? Function(Mostrar2 value)? mostrar2,
+    TResult? Function(Mostrar3 value)? mostrar3,
+  }) {
+    return mostrar3?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Mostrar value)? mostrar,
+    TResult Function(Mostrar2 value)? mostrar2,
+    TResult Function(Mostrar3 value)? mostrar3,
+    required TResult orElse(),
+  }) {
+    if (mostrar3 != null) {
+      return mostrar3(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Mostrar3 implements EditarEvent {
+  const factory Mostrar3() = _$Mostrar3;
 }
 
 /// @nodoc

@@ -153,7 +153,8 @@ class _DetallesState extends State<Detalles> {
       itemBuilder: (BuildContext context, int index) {
         if (docsForFlutter[index]["type"] == "imagen") {
           return 
-          Expanded(child:
+          Expanded(flex:1,
+          child:
           ClipRRect(  
             borderRadius: BorderRadius.circular(20),
             child: Image.network(

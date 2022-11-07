@@ -12,9 +12,13 @@ class EditarBloc extends Bloc<EditarEvent, EditarState> {
     on<EditarEvent>((event, emit)  async{
        emit(state.when(
          initial: () => const EditarState.runing(false),
-         runing:(visi)=> event.when(mostrar: ()=> EditarState.runing(!visi))   
-       ));     
-      }); 
-      
+         runing:(visi)=> event.when(
+          mostrar: ()=> EditarState.runing(!visi), 
+          mostrar2: ()=>EditarState.runing(!visi),
+          mostrar3: ()=>EditarState.runing(!visi)),   
+        )
+       );     
+     }
+    ); 
   }
 }
