@@ -172,14 +172,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        backgroundColor: Color.fromARGB(255, 3, 10, 43),
+        backgroundColor: const Color.fromARGB(255, 3, 10, 43),
         onPressed: () {
           setState(() {});
         },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
