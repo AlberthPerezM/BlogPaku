@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
      return state.visi;
    }
    else if (state is Initial) {
-    return true;
+    return false;
    }else{
-    return true;
+    return false;
    }
 }

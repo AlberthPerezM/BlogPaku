@@ -34,7 +34,6 @@ class _EditarState extends State<Editar> {
       body: ListView(
         padding: const EdgeInsets.all(0),
         children: [
-          const Text('Demo'),
           BlocBuilder<EditarBloc, EditarState>(
             bloc:EditarBloc(),
             builder: (context, state) {
@@ -147,7 +146,7 @@ class _EditarState extends State<Editar> {
                   ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   /*Texto */
                   StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -184,7 +183,7 @@ class _EditarState extends State<Editar> {
       itemBuilder: (BuildContext context, int index) {
        var widthq = MediaQuery.of(context).size.width;
        final varible =EditarBloc();
-        if (docsForFlutter[index]["type"] == "imagen") {
+      if (docsForFlutter[index]["type"] == "imagen") {
              return 
                   Row(
                     children: [
@@ -211,91 +210,115 @@ class _EditarState extends State<Editar> {
                        }
                       },
                     ), 
-                   SizedBox(
-                        width: 330,
-                        child: 
-                        InkWell(                        
-                          child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),           
-                          child: Image.network(
+                    SizedBox(
+                    width: 330,
+                    child: 
+                      InkWell(                        
+                       child: ClipRRect(
+                       borderRadius: BorderRadius.circular(20),           
+                       child: Image.network(
                            docsForFlutter[index]["data"],
                           ),
                         ),
                            onTap: () {
-                             varible.add(const EditarEvent.mostrar2()
+                             varible.add(const EditarEvent.mostrar()
                             );
                           },                 
                       ),
-                    ),
-                   ]
-                 );
+                   ),
+                 ]
+                );
 
-          } else if (docsForFlutter[index]["position"] == 1) {
-            return 
-             Row(
-              children: [
-                Visibility(
-                  visible:false,
-                  maintainSize: true,
-                  maintainAnimation: true,
-                  maintainState: true,
-                  child: IconButton(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    icon: const Icon(
-                      Icons.delete_rounded,
-                      size:30.0,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                InkWell(
-                child:
-                SizedBox( 
-                    width:widthq-espaciado-16,
-                   child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
-                    ),
-                    onTap: () {
-                      setState(() { 
-                      }); 
-                    },                 
-                  ),                 
-                ]
-              );
-          }else if (docsForFlutter[index]["position"] == 3) {
-            return 
-             Row(
-              children: [
-                Visibility(
-                  visible:false,
-                  maintainSize: true,
-                  maintainAnimation: true,
-                  maintainState: true,
-                  child: IconButton(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    icon: const Icon(
-                      Icons.delete_rounded,
-                      size:30.0,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                InkWell(
-                child:
-                SizedBox( 
+          } else if (docsForFlutter[index]["type"] == "parrafo") {
+           return 
+           Column(
+                children: [
+                BlocBuilder<EditarBloc, EditarState>(
+                  bloc:varible,
+                  builder: (context, state) {
+                  if ( state is Initial || state is Running){
+                  return Row(
+                  children: [
+                  Column(children: [
+                  Visibility(
+                    visible:visibilidad(state),
+                    maintainSize:true,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    child: IconButton(
+                      color:const Color.fromARGB(255, 0, 0, 0),
+                      icon: const Icon(
+                      Icons.edit,
+                      size: 20.0,
+                      ),
+                      onPressed: () {},
+                      ),
+                      ),
+                  Visibility(
+                    visible:visibilidad(state),
+                    maintainSize:true,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    child: IconButton(
+                      color:const Color.fromARGB(255, 0, 0, 0),
+                      icon: const Icon(
+                      Icons.delete,
+                      size: 20.0,
+                      ),
+                      onPressed: () {},
+                      ),
+                       ),
+                       ],
+                      ),
+                  InkWell(
+                  child:
+                  SizedBox( 
                   width:widthq-espaciado-16,
-                   child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
-                    ),
+                  child:Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify,),
+                  ),
                     onTap: () {
-                      setState(() { 
-                      }); 
-                    },                 
-                  ),                 
-                ]
-              );
-          } 
+                      varible.add(const EditarEvent.mostrar()
+                        );
+                     },                               
+                  ), 
+                    ],
+                 );
+                 }else{
+                    return Container();
+                    }
+                  },
+                ), 
           
-          
-          else {
+            
+                 Row(
+                 mainAxisAlignment:MainAxisAlignment.center,
+                 children: [
+                 BlocBuilder<EditarBloc, EditarState>(
+                     bloc:varible,
+                     builder: (context, state) {
+                     if ( state is Initial || state is Running){           
+
+                     return Offstage(
+                        offstage:!visibilidad(state),
+                        child: MaterialButton(
+                           minWidth: 200.0,
+                           height: 40.0,
+                           onPressed: () {},
+                           color: Color.fromARGB(255, 241, 80, 0),
+                           child: const Text('Agregar elemento', style: TextStyle(color: Colors.white)),
+                          ),
+                      );
+                        }else{
+                        return Container();
+                       }
+                      },
+                    ),
+                    ],
+                    )   
+                  ],
+            
+            );
+          }else {
           return const Text(
             "Tipo no reconocido",
             textAlign: TextAlign.center,
