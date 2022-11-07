@@ -15,5 +15,6 @@ class EditarBloc extends Bloc<EditarEvent, EditarState> {
          runing:(visi)=> event.when(mostrar: ()=> EditarState.runing(!visi))   
        ));     
       }); 
+      
   }
 }

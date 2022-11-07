@@ -1,8 +1,10 @@
+import 'package:blog/Editar_functions.dart';
 import 'package:blog/bloc/editar_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/src/widgets/visibility.dart';
 
 class Editar extends StatefulWidget {
   const Editar({super.key});    
@@ -21,8 +23,6 @@ class _EditarState extends State<Editar> {
     final doc = db.doc("/blog/$args");
     final docDetail = db.collection("/blog/$args/body").orderBy("position");
     final varible =EditarBloc();
-
-
     return Scaffold(
       appBar: AppBar(
         /*Logo */
@@ -56,50 +56,31 @@ class _EditarState extends State<Editar> {
               return Column(
                 children: [
                    Row(
-                   children: [
-                   BlocBuilder<EditarBloc, EditarState>(
-                   bloc:varible,
-                   builder: (context, state) {
-              
-
-                    if ( state is Initial || state is Running){
-                    return Visibility(
-                    visible:false,
-                    maintainSize: true,
-                    maintainAnimation: true,
-                    maintainState: true,
-                    child: IconButton(
-                    color:const Color.fromARGB(255, 0, 0, 0),
-                    icon: const Icon(
-                       Icons.delete,
-                       size: 20.0,
-                      ),
-                       onPressed: () {},
-                      ),
-                     );
-
-                    /*}else if(state is Running){
-                    return Visibility(
-                    visible:state.visi,
-                    maintainSize: true,
-                    maintainAnimation: true,
-                    maintainState: true,
-                    child: IconButton(
-                    color:const Color.fromARGB(255, 0, 0, 0),
-                    icon: const Icon(
-                       Icons.delete,
-                       size: 20.0,
-                      ),
-                       onPressed: () {},
-                      ),
-                     );*/
-                   
-                       }
+                    children: [
+                    BlocBuilder<EditarBloc, EditarState>(
+                     bloc:varible,
+                     builder: (context, state) {
+                     if ( state is Initial || state is Running){
+                     return Visibility(
+                        visible:visibilidad(state),
+                        maintainSize: true,
+                        maintainAnimation: true,
+                        maintainState: true,
+                        child: IconButton(
+                         color:const Color.fromARGB(255, 0, 0, 0),
+                         icon: const Icon(
+                         Icons.delete,
+                         size: 20.0,
+                          ),
+                          onPressed: () {},
+                         ),
+                      ); }
                        else{
-                        return Container(color:Colors.red);
+                        return Container();
                        }
                       },
-                    ), SizedBox(
+                    ), 
+                    Container(
                         width: 330,
                         child: 
                         InkWell(                        
