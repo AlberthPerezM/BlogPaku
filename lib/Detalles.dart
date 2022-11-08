@@ -3,36 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-
 class Detalles extends StatefulWidget {
   const Detalles({super.key});
-
   @override
   State<Detalles> createState() => _DetallesState();
 }
-
 class _DetallesState extends State<Detalles> {
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
-
-    /*final blog = db.collection("blog");*/
     final args = ModalRoute.of(context)!.settings.arguments as String;
     final doc = db.doc("/blog/$args");
     final docDetail = db.collection("/blog/$args/body").orderBy("position");
-                      
     return Scaffold(
       appBar: AppBar(
-        
         /*Logo */
-        title: const Text(
-          "Volver",
-          style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        actions: <Widget>[
-
-
+        title: const Text("Volver",
+        style: TextStyle(
+        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
@@ -40,15 +29,13 @@ class _DetallesState extends State<Detalles> {
               context,
               "editar",
               arguments: args,
-
               );
             },
           ),
         ],
       ),
       body: ListView(
-            padding: const EdgeInsets.all(8),
- 
+        padding: const EdgeInsets.all(8),
         children: [
           /*Nuestro blog */
           const SizedBox(
@@ -65,7 +52,6 @@ class _DetallesState extends State<Detalles> {
               final docsnap = snapshot.data!;
               return Column(
                 children: [
-                  
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
@@ -138,14 +124,12 @@ class _DetallesState extends State<Detalles> {
       ),
     );
   }
-
   String getTime(var time) {
     final DateFormat formatter =
         DateFormat('dd/MM/yyyy'); //your date format here
     var date = time.toDate();
     return formatter.format(date);
   }
-
   getDetailWidgetByData(List<dynamic> docsForFlutter) {
     return ListView.builder(
       itemCount: docsForFlutter.length,
@@ -153,16 +137,12 @@ class _DetallesState extends State<Detalles> {
       itemBuilder: (BuildContext context, int index) {
         if (docsForFlutter[index]["type"] == "imagen") {
           return 
-          Expanded(flex:1,
-          child:
           ClipRRect(  
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
               docsForFlutter[index]["data"], 
             ),
-          ),
-        );
-      
+          );
         } else if (docsForFlutter[index]["type"] == "parrafo") {
           return 
           Container( 
@@ -171,9 +151,7 @@ class _DetallesState extends State<Detalles> {
             child:
             Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify),
           );
-            
-         
-        } else {
+         } else {
           return const Text(
             "Tipo no reconocido",
             textAlign: TextAlign.center,

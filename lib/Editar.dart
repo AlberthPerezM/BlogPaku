@@ -11,7 +11,6 @@ class Editar extends StatefulWidget {
   @override
   State<Editar> createState() => _EditarState();
 }
-
 class _EditarState extends State<Editar> {
   bool isVisible = false;
   var espaciado=40.0;
@@ -73,8 +72,8 @@ class _EditarState extends State<Editar> {
                           ),
                           onPressed: () {},
                          ),
-                      ); }
-                       else{
+                      ); 
+                      }else{
                         return Container();
                        }
                       },
@@ -93,8 +92,8 @@ class _EditarState extends State<Editar> {
                              varible.add(const EditarEvent.mostrar()
                             );
                           },                 
-                      ),
-                    ),
+                        ),
+                     ),
                    ]
                  ),  
                   const SizedBox(
@@ -103,7 +102,7 @@ class _EditarState extends State<Editar> {
                   Row( 
                     children: [
                       //titulo
-                      Expanded(flex: 1, 
+                      Expanded(
                       child:     
                        Container(
                        margin: EdgeInsets.only(left: espaciado),
@@ -113,7 +112,7 @@ class _EditarState extends State<Editar> {
                           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold ),
                          ),
                          ),
-                      ),
+                       ),
                       Text(
                         (getTime(docsnap['date'])),
                         style: const TextStyle(fontSize: 15),
@@ -184,9 +183,8 @@ class _EditarState extends State<Editar> {
        var widthq = MediaQuery.of(context).size.width;
        final varible =EditarBloc();
       if (docsForFlutter[index]["type"] == "imagen") {
-             return 
-                  Row(
-                    children: [
+            return Row(
+                   children: [
                     BlocBuilder<EditarBloc, EditarState>(
                      bloc:varible,
                      builder: (context, state) {
@@ -204,12 +202,12 @@ class _EditarState extends State<Editar> {
                           ),
                           onPressed: () {},
                          ),
-                      ); }
-                       else{
+                       ); 
+                       }else{
                         return Container();
                        }
                       },
-                    ), 
+                    ),     
                     SizedBox(
                     width: 330,
                     child: 
@@ -220,16 +218,16 @@ class _EditarState extends State<Editar> {
                            docsForFlutter[index]["data"],
                           ),
                         ),
-                           onTap: () {
+                          onTap: () {
                              varible.add(const EditarEvent.mostrar()
                             );
                           },                 
                       ),
-                   ),
+                    ),
                  ]
                 );
 
-          } else if (docsForFlutter[index]["type"] == "parrafo") {
+          }else if (docsForFlutter[index]["type"] == "parrafo") {
            return 
            Column(
                 children: [
@@ -252,8 +250,8 @@ class _EditarState extends State<Editar> {
                       size: 20.0,
                       ),
                       onPressed: () {},
-                      ),
-                      ),
+                    ),
+                  ),
                   Visibility(
                     visible:visibilidad(state),
                     maintainSize:true,
@@ -267,9 +265,9 @@ class _EditarState extends State<Editar> {
                       ),
                       onPressed: () {},
                       ),
-                       ),
-                       ],
-                      ),
+                     ),
+                    ],
+                   ),
                   InkWell(
                   child:
                   SizedBox( 
@@ -288,10 +286,8 @@ class _EditarState extends State<Editar> {
                     }
                   },
                 ), 
-          
-            
-                 Row(
-                 mainAxisAlignment:MainAxisAlignment.center,
+                Row(
+                 mainAxisAlignment:MainAxisAlignment.spaceAround,
                  children: [
                  BlocBuilder<EditarBloc, EditarState>(
                      bloc:varible,
@@ -300,23 +296,23 @@ class _EditarState extends State<Editar> {
 
                      return Offstage(
                         offstage:!visibilidad(state),
-                        child: MaterialButton(
-                           minWidth: 200.0,
-                           height: 40.0,
+                        child:Container( 
+                          margin: EdgeInsets.only(left: espaciado),
+                          width:300,
+                           child: ElevatedButton(
                            onPressed: () {},
-                           color: Color.fromARGB(255, 241, 80, 0),
-                           child: const Text('Agregar elemento', style: TextStyle(color: Colors.white)),
-                          ),
-                      );
+                           style: ElevatedButton.styleFrom(shape: const StadiumBorder(),backgroundColor:const Color.fromARGB(255, 229, 65, 16)),
+                           child: const Text('Agregar elemento'),
+                          )),
+                       );
                         }else{
                         return Container();
                        }
                       },
                     ),
                     ],
-                    )   
-                  ],
-            
+                  )   
+                ],
             );
           }else {
           return const Text(
