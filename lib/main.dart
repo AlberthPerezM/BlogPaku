@@ -59,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: ListView(
-      padding: const EdgeInsets.all(8),
-          children: [
+        padding: const EdgeInsets.all(8),
+        children: [
           const SizedBox(
             height: 9,
           ),
@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           height: 9,
                         ),
                         /* */
-                           SizedBox(
+                        SizedBox(
                           width: 500,
                           height: 20,
                           child: GestureDetector(

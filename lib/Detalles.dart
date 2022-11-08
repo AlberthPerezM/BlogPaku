@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +7,7 @@ class Detalles extends StatefulWidget {
   @override
   State<Detalles> createState() => _DetallesState();
 }
+
 class _DetallesState extends State<Detalles> {
   @override
   Widget build(BuildContext context) {
@@ -18,17 +18,19 @@ class _DetallesState extends State<Detalles> {
     return Scaffold(
       appBar: AppBar(
         /*Logo */
-        title: const Text("Volver",
-        style: TextStyle(
-        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
-         actions: <Widget>[
+        title: const Text(
+          "Volver",
+          style: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
               Navigator.pushNamed(
-              context,
-              "editar",
-              arguments: args,
+                context,
+                "editar",
+                arguments: args,
               );
             },
           ),
@@ -41,7 +43,6 @@ class _DetallesState extends State<Detalles> {
           const SizedBox(
             width: 10,
             height: 20,
-           
           ),
           StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             stream: doc.snapshots(),
@@ -57,7 +58,7 @@ class _DetallesState extends State<Detalles> {
                     child: Image.network(
                       docsnap['image'],
                       width: 400,
-                      height: 200 ,
+                      height: 200,
                     ),
                   ),
                   const SizedBox(
@@ -82,13 +83,11 @@ class _DetallesState extends State<Detalles> {
                     height: 20,
                   ),
                   Container(
-                  margin:const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                  child:
-                   Text(
-                    docsnap["summary"],
-                    textAlign: TextAlign.justify,
-                   ),
- 
+                    margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                    child: Text(
+                      docsnap["summary"],
+                      textAlign: TextAlign.justify,
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
@@ -124,34 +123,34 @@ class _DetallesState extends State<Detalles> {
       ),
     );
   }
+
   String getTime(var time) {
     final DateFormat formatter =
         DateFormat('dd/MM/yyyy'); //your date format here
     var date = time.toDate();
     return formatter.format(date);
   }
+
   getDetailWidgetByData(List<dynamic> docsForFlutter) {
     return ListView.builder(
       itemCount: docsForFlutter.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         if (docsForFlutter[index]["type"] == "imagen") {
-          return 
-          ClipRRect(  
+          return ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
-              docsForFlutter[index]["data"], 
+              docsForFlutter[index]["data"],
             ),
           );
         } else if (docsForFlutter[index]["type"] == "parrafo") {
-          return 
-          Container( 
+          return Container(
             width: 10,
-            margin:const EdgeInsets.fromLTRB(8, 8, 8, 8), 
-            child:
-            Text(docsForFlutter[index]["data"],textAlign: TextAlign.justify),
+            margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+            child: Text(docsForFlutter[index]["data"],
+                textAlign: TextAlign.justify),
           );
-         } else {
+        } else {
           return const Text(
             "Tipo no reconocido",
             textAlign: TextAlign.center,
