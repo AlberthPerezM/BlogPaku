@@ -1,10 +1,12 @@
-import 'package:blog/Editar_functions.dart';
-import 'package:blog/bloc/editar_bloc.dart';
+import 'package:blog/AgregarElemento.dart';
+import 'package:blog/Editar/Editar_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/src/widgets/visibility.dart';
+
+import 'Editar/bloc/editar_bloc.dart';
 
 class Editar extends StatefulWidget {
   const Editar({super.key});
@@ -15,7 +17,7 @@ class Editar extends StatefulWidget {
 class _EditarState extends State<Editar> {
   bool isVisible = false;
   var espaciado = 47.0;
-  var rigth=14.0;
+  var rigth = 14.0;
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
@@ -112,7 +114,7 @@ class _EditarState extends State<Editar> {
                         ),
                       ),
                       Container(
-                        margin:EdgeInsets.only(right: rigth),
+                        margin: EdgeInsets.only(right: rigth),
                         child: Text(
                           (getTime(docsnap['date'])),
                           style: const TextStyle(fontSize: 14),
@@ -169,8 +171,7 @@ class _EditarState extends State<Editar> {
   }
 
   String getTime(var time) {
-    final DateFormat formatter =
-        DateFormat('dd/MM/yyyy'); //your date format 
+    final DateFormat formatter = DateFormat('dd/MM/yyyy'); //your date format
     var date = time.toDate();
     return formatter.format(date);
   }
@@ -292,10 +293,17 @@ class _EditarState extends State<Editar> {
                         return Offstage(
                           offstage: !visibilidad(state),
                           child: Container(
-                              margin: EdgeInsets.only(left: espaciado,right: rigth),
+                              margin: EdgeInsets.only(
+                                  left: espaciado, right: rigth),
                               width: 300,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const AgregarElementoPage()),
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                     shape: const StadiumBorder(),
                                     backgroundColor:
