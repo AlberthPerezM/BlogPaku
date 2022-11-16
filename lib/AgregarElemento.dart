@@ -19,8 +19,7 @@ class _AgregarElementoPageState extends State<AgregarElementoPage> {
           title: const Text("Agregar elemento"),
         ),
         body: ListView(
-                  padding: const EdgeInsets.all(8),
-
+          padding: const EdgeInsets.all(8),
           children: [
             Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
@@ -98,8 +97,51 @@ class _AgregarElementoPageState extends State<AgregarElementoPage> {
                     ),
                   ),
                 ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: blue,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.settings, size: size, color: white),
+                        Text(
+                          "Tópico",
+                          style: TextStyle(color: white, fontSize: fontsize),
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                    child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: blue,
+                    ),
+                    child:Stack(
+                    children: const [
+                      Positioned.fill(
+                        top: 120,
+                        left: 110,
+                        child: Icon(
+                          Icons.check_circle,
+                          color: Colors.green,
+                          size: 36.0,
+                        ),
+                      ),
+                    ],
+                  ),
+               
+                )),
               ],
             ),
+           
             ListView(
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(10.0),
