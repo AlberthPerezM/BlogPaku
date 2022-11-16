@@ -97,26 +97,7 @@ class _AgregarElementoPageState extends State<AgregarElementoPage> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: blue,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.settings, size: size, color: white),
-                        Text(
-                          "Tópico",
-                          style: TextStyle(color: white, fontSize: fontsize),
-                        ),
-                        
-                      ],
-                    ),
-                  ),
-                ),
+                
                 InkWell(
                   onTap: () {},
                     child: Container(
